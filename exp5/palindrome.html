@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palindrome Numbers and Sum Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      margin-left: 4px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="number"] {
+      display: block;
+      margin-bottom: 10px;
+      padding: 5px;
+      width: calc(25% - 5px); 
+      box-sizing: border-box;
+      margin-left:3px ;
+    }
+
+    button {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    p#result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Find Palindrome Numbers and Sum</h1>
+  <label for="lowerLimit">Lower Limit:</label> <br>
+  <input type="number" id="lowerLimit" placeholder="Enter lower limit"> <br>
+  <label for="upperLimit">Upper Limit:</label> <br>
+  <input type="number" id="upperLimit" placeholder="Enter upper limit">
+  <button onclick="findPalindromes()">Find Palindromes</button>
+  <p id="result"></p>
+  <script>
+    function isPalindrome(num) {
+      const numStr = num.toString();
+      let reversed = "";
+      for (let i = numStr.length - 1; i >= 0; i--) {
+        reversed += numStr[i];
+      }
+      return parseInt(numStr) === parseInt(reversed);
+    }
+
+    function findPalindromes() {
+      const lowerLimit = parseInt(document.getElementById("lowerLimit").value);
+      const upperLimit = parseInt(document.getElementById("upperLimit").value);
+      const result = document.getElementById("result");
+
+      let sumOfPalindromes = 0;
+      let palindromeList = "";
+
+      for (let i = lowerLimit; i <= upperLimit; i++) {
+        if (isPalindrome(i)) {
+          palindromeList += i + " ";
+          sumOfPalindromes += i;
+        }
+      }
+
+      if (palindromeList) {
+        result.textContent = "Palindrome numbers between " + lowerLimit + " and " + upperLimit + " are: " + palindromeList + "<br> Sum of Palindromes: " + sumOfPalindromes;
+      } else {
+        result.textContent = "No palindrome numbers found in the given range.";
+      }
+    }
+  </script>
+</body>
+</html>
