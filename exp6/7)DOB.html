@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    input[type="date"] {
+      display: block;
+      margin: 0 auto;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Age Calculator</h1>
+  <label for="dobInput">Enter your date of birth:</label> <br>
+  <input type="date" id="dobInput">
+  <button id="calculateButton">Calculate Age</button>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("calculateButton").addEventListener("click", function() {
+      const dobInput = document.getElementById("dobInput").value;
+      const ageDifference = calculateAgeDifference(dobInput);
+      const resultElement = document.getElementById("result");
+
+      resultElement.innerHTML = `<p>Your age is: ${ageDifference.years} years, ${ageDifference.months} months, and ${ageDifference.days} days.</p>`;
+    });
+
+    
+
+    function calculateAgeDifference(dateOfBirth) {
+      const dob = new Date(dateOfBirth);
+      const currentDate = new Date();
+      let difference = currentDate - dob;
+      const daysDifference = Math.floor(difference / (1000 * 60 * 60 * 24));
+      //difference in days by dividing the difference (which is in milliseconds) by the number of milliseconds 
+      //in a day (1000 milliseconds * 60 seconds * 60 minutes * 24 hours).
+      const years = Math.floor(daysDifference / 365);
+      const months = Math.floor((daysDifference % 365) / 30);
+      const days = daysDifference - (years * 365) - (months * 30);
+      if (dob.getMonth() === currentDate.getMonth() && dob.getDate() === currentDate.getDate()) {
+        alert("Happy Birthday, dear user!")
+      }
+      return {
+        years: years,
+        months: months,
+        days: days
+      };
+    }
+  </script>
+</body>
+</html>

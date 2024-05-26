@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random String Generator</title>
+  <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+        }
+    
+        h1 {
+          text-align: center;
+        }
+    
+        input[type="number"] {
+          display: block;
+          margin: 20px auto;
+          padding: 10px;
+          font-size: 16px;
+          width: 280px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          box-sizing: border-box;
+        }
+    
+        button {
+          display: block;
+          margin: 10px auto;
+          padding: 10px 20px;
+          font-size: 16px;
+          border: none;
+          background-color: #007bff;
+          color: #fff;
+          cursor: pointer;
+          border-radius: 5px;
+        }
+    
+        button:hover {
+          background-color: #0056b3;
+        }
+        #randomStringMessage,#extractedCharactersMessage {
+            text-align: center;
+        }
+  </style>
+</head>
+<body>
+  <h1>Generate a Random String</h1>
+  <input type="number" id="stringLength" placeholder="Enter String Length">
+  <button onclick="generateString()">Generate</button>
+  <p id="randomStringMessage"></p>
+  <input type="number" id="charNumber" placeholder="Number of characters to extract">
+  <button onclick="extractCharacters()">Extract Characters</button>
+  <p id="extractedCharactersMessage"></p>
+
+  <script>
+    let randomString = "";
+
+    function generateString() {
+      const stringLength = document.getElementById("stringLength").value;
+      const result = document.getElementById("randomStringMessage");
+
+      if (stringLength === "" || isNaN(stringLength) || stringLength <= 0) {
+        result.textContent = "Please enter a valid positive number for string length.";
+        return;
+      }
+
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      randomString = ""; // Reset randomString before generating a new one
+
+      for (let i = 0; i < stringLength; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        randomString += characters.charAt(randomIndex);
+      }
+      result.textContent = "Your random string is: " + randomString;
+    }
+
+    function extractCharacters() {
+      const charNumber = document.getElementById("charNumber").value;
+      const result = document.getElementById("extractedCharactersMessage");
+
+      if (charNumber === "" || isNaN(charNumber) || charNumber <= 0) {
+        result.textContent = "Please enter a valid positive number for number of characters to extract.";
+        return;
+      }
+
+      if (randomString === "") {
+        result.textContent = "Please generate a random string first.";
+        return;
+      }
+
+      if (charNumber > randomString.length) {
+        result.textContent = "Number of characters to extract exceeds the length of the random string.";
+        return;
+      }
+
+      const extractedCharacters = randomString.substring(0, charNumber);
+      result.textContent = "Extracted characters: " + extractedCharacters;
+    }
+  </script>
+</body>
+</html>

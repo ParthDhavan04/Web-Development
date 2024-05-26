@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Selection Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #007bff;
+            background-color: #fff;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="sportsForm">
+        <h2>Sports Selection Form</h2>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="selectGame">Select Game:</label>
+        <select id="selectGame" name="selectGame" required>
+            <option value="football">Football</option>
+            <option value="basketball">Basketball</option>
+            <option value="tennis">Tennis</option>
+        </select>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" min="1" required>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        const textInputs = document.querySelectorAll('input[type="text"], input[type="password"], input[type="number"]');
+        textInputs.forEach(input => {
+            input.addEventListener('keydown', function(event) {
+                // Check if the Enter key is pressed (key code 13)
+                if (event.keyCode === 13) {
+                    alert("Are you sure you want to submit")
+                    const nextInputIndex = Array.from(textInputs).indexOf(this) + 1;
+                    if (nextInputIndex < textInputs.length) {
+                        textInputs[nextInputIndex].focus();
+                    } else {
+                        document.getElementById('sportsForm').submit();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
