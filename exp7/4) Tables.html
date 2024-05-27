@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tables</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 50px auto;
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #f9f9f9;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+        th {
+            background-color: #e0e0e0;
+        }
+        .even {
+            background-color: #dd9f9f;
+        }
+        .odd {
+            background-color: #b0a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-app="codingNinjaApp" ng-controller="angularController">
+        <h2 align="center"> Sample Data </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th ng-click="sortBy('name')">Name</th>
+                    <th ng-click="sortBy('dob')">Date of Birth</th>
+                    <th ng-click="sortBy('location')">Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="employee in employees | orderBy:sortColumn:reverse" ng-class="{'even': $index % 2 == 0, 'odd': $index % 2 != 0}">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.dob | date:'dd MMMM yyyy'}}</td>
+                    <td>{{employee.location}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        var app = angular.module("codingNinjaApp", []);
+        app.controller("angularController", function ($scope) {
+            $scope.employees = [
+                { name: "Anshika Srivastava", dob: new Date(2004, 7, 17), location: 'Lucknow' },
+                { name: "Harshit Jasrai", dob: new Date(2004, 2, 3), location: 'Talwara' },
+                { name: "Sairanjan Subudhi", dob: new Date(2004, 8, 5), location: 'Haridwar' },
+                { name: "Rajvardhan Singh", dob: new Date(2003, 11, 26), location: 'Gwalior' },
+                { name: "Darvish", dob: new Date(2004, 8, 8), location: 'Rohtak' },
+                { name: "Parth Dhavan", dob: new Date(2004, 0, 4), location: 'Dasuya' },
+                { name: "Swasti Negi", dob: new Date(2004, 6, 1), location: 'Dehradun' },
+                { name: "Rushil Alagh", dob: new Date(2004, 6, 25), location: 'Haridwar' },
+                { name: "Harsh Bhartia", dob: new Date(2004, 0, 20), location: 'Kanpur' }
+            ];
+
+            $scope.sortColumn = ''; 
+            $scope.reverse = false; 
+
+            $scope.sortBy = function(column) {
+                if ($scope.sortColumn === column) {
+                    $scope.reverse = !$scope.reverse;
+                } else {
+                    $scope.sortColumn = column;
+                    $scope.reverse = false;
+                }
+            };
+        });
+    </script>
+</body>
+</html>

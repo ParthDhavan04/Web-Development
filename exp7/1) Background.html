@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Background color</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #79a473;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid #ccc;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #66afe9;
+            box-shadow: 0 0 5px #66afe9;
+        }
+    </style>
+</head>
+<body style="background-color: #f0f0f0;">
+    <div class="container" ng-app="">
+        <h1>Background Color Changer</h1>
+        <p>Input a color in the input box:</p>
+        <p>Name : <br> <input type="text" ng-model="name" placeholder="Enter name here"
+            style="background-color: {{name}};"> 
+        </p> 
+        <h2>Changed Color is  {{name}}</h2>
+    </div>
+</body>
+</html>
